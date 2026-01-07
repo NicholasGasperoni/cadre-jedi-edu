@@ -30,6 +30,13 @@ docker run -it --rm -p 9999:8888 -v <your>/<path>/<to>/jedi-edu/notebooks/:/home
 ```
 The next time you want to enter the container, you will only need to enter the `docker run` command.
 
+Note you may get teh following warnings from the docker build step. These can be safely ignored.
+```
+ 2 warnings found (use docker --debug to expand):
+ - InvalidBaseImagePlatform: Base image jcsda/docker-clang-mpich-dev:edu was pulled with platform "linux/amd64", expected "linux/arm64" for current build (line 1)
+ - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 15)
+```
+
 If it worked, you will see a message resembling:
 ```
 check start
