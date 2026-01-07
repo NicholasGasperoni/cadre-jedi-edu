@@ -7,8 +7,9 @@ This software is licensed under the terms of the Apache Licence Version 2.0 whic
 ### Install docker on your laptop
 Scroll down to the bottom of the page: https://docs.docker.com/desktop/
 Open docker and wait for it to start.
+
 Go to settings in the Docker window (gear icon at top), then scroll down to "Virtual Machine Options".
-Under 'Choose Virtual Machine Manager (VMM)', select "QEMU (Legacy)", then click Apply and Restart at the bottom right.
+Under 'Choose Virtual Machine Manager (VMM)', select "QEMU (Legacy)", then click "Apply and Restart" at the bottom right.
 
 ### Clone the jedi-edu repository
 Open a terminal window and clone the jedi-edu repository.
