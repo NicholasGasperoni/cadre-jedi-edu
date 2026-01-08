@@ -1,6 +1,10 @@
 FROM jcsda/docker-clang-mpich-dev:edu
-RUN pip3 install jupyter -U && pip3 install jupyterlab
-RUN pip3 install bash_kernel && python3 -m bash_kernel.install
+#NOTE python used by Container is /opt/view/bin/python3, so need to install with that version
+RUN /opt/view/bin/python3 -m pip install jupyter -U && /opt/view/bin/python3 -m pip install jupyterlab
+RUN /opt/view/bin/python3 -m pip install bash_kernel && /opt/view/bin/python3 -m bash_kernel.install
+RUN /opt/view/bin/python3 -m pip install -U matplotlib
+RUN /opt/view/bin/python3 -m pip show numpy
+RUN /opt/view/bin/python3 -m pip install netCDF4
 
 COPY start /srv
 RUN chmod +x /srv/start

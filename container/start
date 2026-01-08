@@ -1,6 +1,8 @@
 #!/bin/bash -l
 
 echo -e "check start"
+export PYTHONPATH=/opt/software/linux-ubuntu20.04-skylake_avx512/clang-10.0.0/python-3.9.12-xq3z5oox4egyks4f5lmwkta3vq67lccd/lib/python3.9/site-packages
+export PATH="/opt/software/linux-ubuntu20.04-skylake_avx512/clang-10.0.0/python-3.9.12-xq3z5oox4egyks4f5lmwkta3vq67lccd/bin:$PATH"
 exec jupyter lab --ip=0.0.0.0 --NotebookApp.token='' --NotebookApp.password='' &> /tmp/jupyter_runlog.txt &
 echo -e "\nWelcome to JEDI Tutorial!  To connect, open your browser to:\n\t localhost:<port>"
 echo -e "\nNOTE: Replace '<port>' with the port you specified in your 'docker run' command. For example, if you used the option:"
