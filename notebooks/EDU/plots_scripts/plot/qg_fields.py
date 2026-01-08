@@ -215,7 +215,10 @@ def func(args):
         norm = []
         norm_obs = []
         if args.fieldmax:
-            vmax = int(args.fieldmax)
+            vmax = float(args.fieldmax)
+            if (variable == 'q'): vmax=0.5*vmax*10**-12 #3.5e-4
+            if (variable == 'u'): vmax=0.5*vmax*10**-6 #140.0
+            if (variable == 'v'): vmax=0.5*vmax*10**-6 #70.0
             vmin = -vmax
             npltlevs=22
         else:
@@ -223,10 +226,10 @@ def func(args):
             tmax=0.0
             tmin=0.0
             if args.basefilepath is None: # Full field
-                if (variable == 'x'): vmax=1.0e8 #5.0e8
-                if (variable == 'q'): vmax=4.0e-5  #6.5e-4
-                if (variable == 'u'): vmax=25.0 #145.0
-                if (variable == 'v'): vmax=25.0 #90.0
+                if (variable == 'x'): vmax=5.0e8 #5.0e8
+                if (variable == 'q'): vmax=6.5e-4  #6.5e-4
+                if (variable == 'u'): vmax=150.0 #145.0
+                if (variable == 'v'): vmax=100.0 #90.0
                 npltlevs=22
             else: # Difference field
                 if (variable == 'x'): vmax=1.0e8
