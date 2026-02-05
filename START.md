@@ -22,11 +22,11 @@ Note on some older Mac/Docker versions, there may be a "QEMU (Legacy)" option as
 ### Download (clone) the repository containing cadre-jedi-edu tutorials and jedi programs
 
 - For Windows Users:
--- Download and install git following the instructions at the following link:  https://git-scm.com/install/windows
--- Open a Powershell terminal window.
-   (Optional) Some users may find VS code to be more helpful/convenient, which is a program that can be downloaded for free online.
--- Double-check that git is installed correctly by running the command ```git --version```
--- Run the git command below
+  - Download and install git following the instructions at the following link:  https://git-scm.com/install/windows
+  - Open a Powershell terminal window.
+    -(Optional) Some users may find VS code to be more helpful/convenient, which is a program that can be downloaded for free online.
+  - Double-check that git is installed correctly by running the command ```git  --version```
+  - Run the git command below
 ``` 
 git clone https://github.com/NicholasGasperoni/cadre-jedi-edu.git
 # Enter the cadre-jedi-edu repository:
@@ -36,8 +36,8 @@ ls .
 ```
 
 - For Mac Users: 
--- Open the terminal window from the Terminal app
--- Run the git command below (note git should automatically download & install if it is not already installed on your macbook)
+  - Open the terminal window from the Terminal app
+  - Run the git command below (note git should automatically download & install if it is not already installed on your macbook)
 ```
 git clone https://github.com/NicholasGasperoni/cadre-jedi-edu.git
 # Enter the cadre-jedi-edu repository:
