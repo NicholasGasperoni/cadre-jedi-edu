@@ -1,0 +1,29 @@
+geometry:
+  nx: 40
+  ny: 20
+  depths: [4000.0, 6000.0]
+state:
+  date: 2009-12-31T00:00:00Z
+  filename: qg3Dvar/output/exp_default/bg/bkgd.fc.2009-12-30T00:00:00Z.P1D.nc
+window begin: 2009-12-30T21:00:00Z
+window length: PT6H
+observations:
+  get values:
+    variable change:
+      input variables: []
+      output variables: []
+  observers:
+  - obs operator:
+      obs type: Stream                             # The observation type is the stream function
+    obs space:
+      obsdatain:
+        engine:
+          obsfile: qg3Dvar/output/exp_default/obs/truth_oneob.obs3d.nc
+      obsdataout:
+        engine:
+          obsfile: qg3Dvar/output/exp_default/obs/hofx_bkgd_oneob.obs3d.nc
+      obs type: Stream
+    obs operator:
+      obs type: Stream
+    get values:
+      interpolation type: default_1

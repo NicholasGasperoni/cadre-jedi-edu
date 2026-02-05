@@ -283,7 +283,7 @@ def func(args):
                 if args.basefilepath is None:
                     im = ax.contourf(lon_coord, lat_coord, fields_plot[iplot][level], cmap="Spectral_r", levels=clevels[level],norm=norm[level])
                 else:
-                    im = ax.contourf(lon_coord, lat_coord, fields_plot[iplot][level], cmap="RdBu_r", levels=clevels[level],norm=norm[level])
+                    im = ax.contourf(lon_coord, lat_coord, fields_plot[iplot][level], extend='both',  cmap="RdBu_r", levels=clevels[level],norm=norm[level])
 
                 if args.plotwind:
                     # Plot wind field
@@ -310,7 +310,7 @@ def func(args):
 
                 # Set plot formatting
                 ax.set_aspect("equal")
-                cb = fig.colorbar(im, ax=ax, shrink=0.9, format=("%.1e" if variable == "q" else None))
+                cb = fig.colorbar(im, ax=ax, shrink=0.9, extend='both', format=("%.1e" if variable == "q" else None))
                 ax.set_ylabel("Altitude {:.0f}$\,$m".format(z_coord[level]))
                 ax.xaxis.set_major_formatter(my_formatter)
 
@@ -338,7 +338,7 @@ def func(args):
                 cmd = cmd + plotpath + " "
                 if iplot == 0:
                     gifpath = plotpath.replace(".jpg", ".gif")
-            plt.savefig(plotpath, format="jpg", dpi=300)
+            plt.savefig(plotpath, format="jpg", dpi=150)
             plt.close()
             print(" -> plot produced: " + plotpath)
 

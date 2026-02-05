@@ -1,4 +1,4 @@
-forecast length: P21D                             # Run truth model for 18 days
+forecast length: P21D                             # Run truth model for 21 days
 geometry:                                         # Declare the geometry of the model grid points
   nx: 40                                          # number of grid points in zonal direction
   ny: 20                                          # number of grid points in the meridional direction
