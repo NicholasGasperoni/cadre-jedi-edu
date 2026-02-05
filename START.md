@@ -60,7 +60,7 @@ docker build -t educontainer --build-arg=Dockerfile .
 ```
 The build process will take approximately 6 minutes to complete.
 Once the container is built successfully, we can now attempt to run it from within the container directory!
-Run the docker ommand below, making sure to replace "<your>/<path>/<to>" with the actual path on your local computer (run the `pwd` command if you are not sure what directory to input!)
+Run the docker ommand below, making sure to replace ```"<your>/<path>/<to>"``` with the actual path on your local computer (run the `pwd` command if you are not sure what directory to input!)
 ```
 # Make sure the folloring is invoked within the `cadre-jedi-edu/container` directory
 # Run the following command for MAC users
