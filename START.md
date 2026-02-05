@@ -58,7 +58,7 @@ Navigate to the container directory and build the container with the following c
 cd container
 docker build -t educontainer --build-arg=Dockerfile .
 ```
-
+The build process will take approximately 6 minutes to complete.
 Once the container is built successfully, we can now attempt to run it from within the container directory!
 Run the docker ommand below, making sure to replace "<your>/<path>/<to>" with the actual path on your local computer (run the `pwd` command if you are not sure what directory to input!)
 ```
