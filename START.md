@@ -24,7 +24,7 @@ Note on some older Mac/Docker versions, there may be a "QEMU (Legacy)" option as
 - For Windows Users:
   - Download and install git following the instructions at the following link:  https://git-scm.com/install/windows
   - Open a Powershell terminal window.
-    -(Optional) Some users may find VS code to be more helpful/convenient, which is a program that can be downloaded for free online.
+    - (Optional) Some users may find VS code to be more helpful/convenient, which is a program that can be downloaded for free online.
   - Double-check that git is installed correctly by running the command ```git  --version```
   - Run the git command below
 ``` 
