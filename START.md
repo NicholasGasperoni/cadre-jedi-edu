@@ -94,7 +94,7 @@ Then you should open the browser and go to:
 ```
 
 ### View the container and tutorials!
-- Open your favorite web browser and enter `localhost:9999` as URL. This may take up to ~20 seconds to load correctly, so be patient. 
+- Open your favorite web browser and enter `localhost:9999` as URL. This may take up to ~20 seconds to load correctly, so be patient. You may need to refresh once or twice before it appears. 
 All that follows in the tutorial is done **in the container ON THE WEBPAGE you just opened**.
 - Open the first tutorial
 On the left of the web page there is a tree of files. Click on the little folder icon if you aren't on it already (open the one called `shared/`), and double click on `0.qg_tutorial_start.ipynb`.
