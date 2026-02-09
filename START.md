@@ -64,9 +64,9 @@ Run the docker ommand below, making sure to replace ```"<your>/<path>/<to>"``` w
 ```
 # Make sure the folloring is invoked within the `cadre-jedi-edu/container` directory
 # Run the following command for MAC users
-docker run -it --rm -p 9999:8888 -v <your>/<path>/<to>/cadre-jedi-edu/notebooks/:/home/nonroot/shared educontainer
+docker run -it  -p 9999:8888 -v <your>/<path>/<to>/cadre-jedi-edu/notebooks/:/home/nonroot/shared educontainer
 # -or- the following command for WINDOWS users
-docker run -it --rm -p 9999:8888 --mount type=bind,source="$(Resolve-Path ..\notebooks)",target=/home/nonroot/shared --entrypoint /bin/sh educontainer -c "tr -d '\r' < /srv/start > /tmp/start && chmod +x /tmp/start && exec /tmp/start"
+docker run -it  -p 9999:8888 --mount type=bind,source="$(Resolve-Path ..\notebooks)",target=/home/nonroot/shared --entrypoint /bin/sh educontainer -c "tr -d '\r' < /srv/start > /tmp/start && chmod +x /tmp/start && exec /tmp/start"
 ```
 
 
