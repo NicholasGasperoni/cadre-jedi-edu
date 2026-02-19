@@ -29,7 +29,7 @@ cost function:
   geometry:
     nx: 40
     ny: 20
-    depths: [4500.0, 5500.0]
+    depths: [4000.0, 6000.0]
   model:
     name: QG
     tstep: PT1H
@@ -42,7 +42,7 @@ variational:
     geometry:
       nx: 40
       ny: 20
-      depths: [4500.0, 5500.0]
+      depths: [4000.0, 6000.0]
     linear model:
       name: QgTLM
       trajectory:
@@ -57,7 +57,7 @@ variational:
     geometry:
       nx: 40
       ny: 20
-      depths: [4500.0, 5500.0]
+      depths: [4000.0, 6000.0]
     linear model:
       name: QgTLM
       trajectory:
@@ -74,7 +74,7 @@ final:
     frequency: PT1H
 output:
   datadir: qg4Dvar/output/exp_begin/da/
-  exp: 4dvar.1obs.begin
+  exp: 4dvar
   first: PT0S
   frequency: PT6H
   type: an

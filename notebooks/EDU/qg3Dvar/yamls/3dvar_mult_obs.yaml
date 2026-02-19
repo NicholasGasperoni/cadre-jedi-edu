@@ -83,6 +83,6 @@ final:
       analysis variables: [x]
 output:
   datadir: qg3Dvar/output/exp_mult_obs/da
-  exp: 3dvar_mult_obs
+  exp: 3dvar
   frequency: PT6H
   type: an

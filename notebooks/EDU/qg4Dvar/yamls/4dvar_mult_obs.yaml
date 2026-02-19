@@ -72,7 +72,7 @@ final:
     departures: oman
 output:
   datadir: qg4Dvar/output/exp_mult/da
-  exp: 4dvar.multobs
+  exp: 4dvar
   first: PT0S
   frequency: PT6H
   type: an
