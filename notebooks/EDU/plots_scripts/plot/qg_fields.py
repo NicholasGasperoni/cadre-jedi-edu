@@ -315,7 +315,7 @@ def func(args):
                 ax.xaxis.set_major_formatter(my_formatter)
 
                 # Set title
-                varname = dict(x="Streamfunction", q="Potential vorticity",u="Horizontal Wind", v="Vertical Wind").get(variable)
+                varname = dict(x="Streamfunction", q="Potential vorticity",u="Zonal Wind", v="Meridional Wind").get(variable)
                 unit = dict(x="m$^2$s$^{-1}$", q="s$^{-1}$", u="m/s",v="m/s").get(variable)
                 if not args.title is None:
                     fig.suptitle(args.title + " - " + varname + " in " + unit)
