@@ -216,9 +216,11 @@ def func(args):
         norm_obs = []
         if args.fieldmax:
             vmax = float(args.fieldmax)
-            if (variable == 'q'): vmax=0.5*vmax*10**-12 #3.5e-4
-            if (variable == 'u'): vmax=0.5*vmax*10**-6 #140.0
-            if (variable == 'v'): vmax=0.5*vmax*10**-6 #70.0
+            ex=1
+            if (vmax > 1e12): ex=2
+            if (variable == 'q'): vmax=0.5*vmax*(10**-12)**ex #3.5e-4
+            if (variable == 'u'): vmax=0.5*vmax*(10**-6)**ex #140.0
+            if (variable == 'v'): vmax=0.5*vmax*(10**-6)**ex #70.0
             vmin = -vmax
             npltlevs=22
         else:
@@ -281,7 +283,7 @@ def func(args):
             for level, ax in zip(levels, axs[::-1]):
                 # Plot variable
                 if args.basefilepath is None:
-                    im = ax.contourf(lon_coord, lat_coord, fields_plot[iplot][level], cmap="Spectral_r", levels=clevels[level],norm=norm[level])
+                    im = ax.contourf(lon_coord, lat_coord, fields_plot[iplot][level], extend='both', cmap="Spectral_r", levels=clevels[level],norm=norm[level])
                 else:
                     im = ax.contourf(lon_coord, lat_coord, fields_plot[iplot][level], extend='both',  cmap="RdBu_r", levels=clevels[level],norm=norm[level])
 
