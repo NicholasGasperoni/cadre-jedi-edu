@@ -1,0 +1,66 @@
+window begin: &date_bgn 2009-12-30T18:00:00Z
+window length: PT12H
+
+geometry:
+  nx: 40
+  ny: 20 
+  depths: [4000.0, 6000.0]
+
+background:
+  members from template:
+    template:
+      states:
+      - date: &date_mid 2009-12-31T00:00:00Z
+        filename: qgstart/output/bg/bkgd.ens.%mem%.2009-12-30T00:00:00Z.P1D.nc
+    pattern: %mem%
+    nmembers: 5                       # Number of ensemble members to analyze
+
+observations:
+  observers:
+  - obs operator:
+      obs type: Stream
+    obs space:
+      obsdatain:
+        engine:
+          obsfile: qgLETKF/output/exp_5mem/obs/truth_oneob_newloc.obs3d.nc
+      obsdataout:
+        engine:
+          obsfile: qgLETKF/output/exp_5mem/obs/letkf_oneob_newloc.obs3d.nc
+      obs type: Stream
+    obs error:
+      covariance model: diagonal        # Obs errors genetally considered uncorrelated in R
+    obs localizations:                  # Localization is handled in observation space              
+    - localization method: Heaviside    # 'Heaviside' is a step function (1 if within region, 0 outside of region)
+      lengthscale: 8.0e6                # Horizontal length scale used for Heaviside function in localization
+                                        # Note no vertical localization is applied 
+                       
+driver:
+  update obs config with geometry info: false
+  save prior mean: true                 # Save the ensemble mean background/prior if true
+  save posterior mean: true             # Save the ensemble mean analysis/posterior if true
+  save posterior mean increment: true   # Save the ensemble mean analysis increments if true
+
+local ensemble DA: 
+  solver: LETKF  # Controls which flavor of ensemble solver is used
+  inflation:    # Covariance inflation (applied after LETKF update)
+    rtpp: 0.5   # Relaxation to prior perturbations
+    mult: 1.1   # Multiplicative inflation factor
+
+output: # Controls output of different ensemble member analyses
+  states:  
+  - datadir: qgLETKF/output/exp_5mem/da
+    date: *date_mid
+    exp: letkf.%{member}%
+    type: an
+  
+output increment: # Controls output of ensemble mean analysis increments
+  datadir: qgLETKF/output/exp_5mem/da
+  exp: letkf_meaninc
+  date: *date_mid
+  type: an
+
+output mean prior: # Controls output of ensemble mean background
+  datadir: qgLETKF/output/exp_5mem/da
+  exp: letkf_meanprior
+  date: *date_mid
+  type: an
