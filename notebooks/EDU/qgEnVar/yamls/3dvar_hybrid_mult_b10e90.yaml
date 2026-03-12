@@ -1,0 +1,102 @@
+cost function:
+  cost type: 3D-Var
+  window begin: 2009-12-30T21:00:00Z
+  window length: PT6H
+  analysis variables: [x]
+  geometry:
+    nx: 40
+    ny: 20
+    depths: [4000.0, 6000.0]
+  background:
+    date: 2009-12-31T00:00:00Z
+    filename: qgstart/output/bg/bkgd.fc.2009-12-30T00:00:00Z.P1D.nc
+  background error:
+    covariance model: hybrid            # activate hybrid covariance model mode
+    components:  
+    - covariance:                       
+        covariance model: QgError        # Section that defines the static-B covariance model
+        horizontal_length_scale: 2.2e6
+        maximum_condition_number: 1.0e6
+        standard_deviation: 1.8e7
+        vertical_length_scale: 15000.0
+      weight:
+        value: 0.1                        # weight of static B covariances in hybrid-B
+    - covariance:
+        covariance model: ensemble        # Section that defines the ensemble covariances
+        localization:                     # including localizations for the ensemble perturbations
+          horizontal_length_scale: 4.0e6
+          localization method: QG
+          maximum_condition_number: 1.0e6
+          standard_deviation: 1.0
+          vertical_length_scale: 30000.0
+        members from template:
+          template:
+            date: 2009-12-31T00:00:00Z
+            filename: qgstart/output/bg/bkgd.ens.%mem%.2009-12-30T00:00:00Z.P1D.nc 
+          pattern: %mem%
+          nmembers: 20
+      weight:
+        value: 0.9                        # weight of Ensemble covariances in hybrid-B
+  observations:
+    observers:
+    - obs operator:
+        obs type: Stream
+      obs space:
+        obsdatain:
+          engine:
+            obsfile: qgstart/output/obs/truth_100obs.obs3d.nc
+        obsdataout:
+          engine:
+            obsfile: qgEnVar/output/exp_mult_b10e90/obs/3denvar_obsdataout.obs3d.nc
+        obs type: Stream
+      obs error:
+        covariance model: diagonal
+variational:
+  minimizer:
+    algorithm: DRIPCG
+  iterations:
+  - ninner: 10
+    gradient norm reduction: 1.0e-10
+    geometry:
+      nx: 40
+      ny: 20
+      depths: [4000.0, 6000.0]
+    diagnostics:
+      departures: ombg0
+  - ninner: 10
+    gradient norm reduction: 1.0e-10
+    geometry:
+      nx: 40
+      ny: 20
+      depths: [4000.0, 6000.0]
+    diagnostics:
+      departures: ombg1
+final:
+  diagnostics:
+    departures: oman
+output:
+  datadir: Data
+  exp: 3dvar
+  frequency: PT6H
+  type: an
+
+final:
+  diagnostics:
+    departures: oman                   # After minimization generate observations - analysis departures
+  increment:                           # Save the increment
+    geometry:
+      nx: 40
+      ny: 20
+      depths: [4000.0, 6000.0]
+    output:
+      datadir: qgEnVar/output/exp_mult_b10e90/da
+      date: 2009-12-31T00:00:00Z
+      exp: EnVar.increment
+      filename: EnVar.increment
+      type: in
+      analysis variables: [x]
+output:
+  datadir: qgEnVar/output/exp_mult_b10e90/da
+  exp: EnVar
+  frequency: PT6H
+  type: an

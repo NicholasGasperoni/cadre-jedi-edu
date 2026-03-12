@@ -171,7 +171,8 @@ def func(args):
         z_coord = netCDF4.Dataset(filepaths[0]).variables["z"][:]
         lon_coord = netCDF4.Dataset(filepaths[0]).variables["lon"][:]
         lat_coord = netCDF4.Dataset(filepaths[0]).variables["lat"][:]
-
+ 
+        z_depths = [ [0, z_coord[0]*2/1000], [z_coord[0]*2/1000, 10] ]
         min_lon = np.min(lon_coord)
         max_lon = np.max(lon_coord)
         min_lat = np.min(lat_coord)
@@ -313,7 +314,8 @@ def func(args):
                 # Set plot formatting
                 ax.set_aspect("equal")
                 cb = fig.colorbar(im, ax=ax, shrink=0.9, extend='both', format=("%.1e" if variable == "q" else None))
-                ax.set_ylabel("Altitude {:.0f}$\,$m".format(z_coord[level]))
+                #ax.set_ylabel("Altitude {:.0f}$\,$m".format(z_coord[level]))
+                ax.set_ylabel(f"Ly {level+1}: {int(z_depths[level][0])}-{int(z_depths[level][1])}km")
                 ax.xaxis.set_major_formatter(my_formatter)
 
                 # Set title
