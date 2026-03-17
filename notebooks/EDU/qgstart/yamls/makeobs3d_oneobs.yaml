@@ -20,8 +20,8 @@ observations:
         begin: PT6H
         nval: 1
         obs locations:
-          lon: [-10]                               # List of longitudes for generated observations (only one here)
-          lat: [35]                                # List of latitudes for generated observations (only one here)
+          lon: [150]                               # List of longitudes for generated observations (only one here)
+          lat: [50]                                # List of latitudes for generated observations (only one here)
           z: [7000.0]                              # List of heights for generated observations (only one here)
         obs error: 4.0e6                           # Observation error standard deviation, in m^2/s
         obs period: PT12H
