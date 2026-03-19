@@ -1,0 +1,21 @@
+background:
+  date: 2009-12-31T00:00:00Z
+  filename: qgstart/output/bg/bkgd.ens.1.2009-12-30T00:00:00Z.%FHR%.nc
+  state variables: [x,q,u,v]
+ensemble:
+  members from template:
+    template:
+      date: 2009-12-31T00:00:00Z
+      filename: qgstart/output/bg/bkgd.ens.%mem%.2009-12-30T00:00:00Z.%FHR%.nc
+      state variables: [x,q,u,v]
+    pattern: %mem%
+    nmembers: 20
+geometry:
+  nx: 40
+  ny: 20
+  depths: [4000.0, 6000.0]
+variance output:
+  datadir:  qg4DEnVar/output/exp_begin/da
+  exp: variance
+  type: diag
+  date: 2009-12-%DAT%:00:00Z

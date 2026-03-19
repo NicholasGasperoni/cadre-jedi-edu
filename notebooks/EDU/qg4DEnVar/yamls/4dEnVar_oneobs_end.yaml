@@ -1,0 +1,98 @@
+cost function:
+  cost type: 4D-Ens-Var               # Four-dimensional ensemble-variational method
+  window begin: 2009-12-30T00:00:00Z
+  window length: PT24H                # Total window for DA (24 h)
+  subwindow: PT6H                     # Defines length of subwindows in the full DA window
+  analysis variables: [x]              
+  background:                         # Background trajectory: states at subwindow boundaries
+    states:
+    - date: 2009-12-30T00:00:00Z
+      filename: qgstart/output/bg/bkgd.fc.2009-12-30T00:00:00Z.PT0S.nc
+    - date: 2009-12-30T06:00:00Z
+      filename: qgstart/output/bg/bkgd.fc.2009-12-30T00:00:00Z.PT6H.nc
+    - date: 2009-12-30T12:00:00Z
+      filename: qgstart/output/bg/bkgd.fc.2009-12-30T00:00:00Z.PT12H.nc
+    - date: 2009-12-30T18:00:00Z
+      filename: qgstart/output/bg/bkgd.fc.2009-12-30T00:00:00Z.PT18H.nc
+    - date: 2009-12-31T00:00:00Z
+      filename: qgstart/output/bg/bkgd.fc.2009-12-30T00:00:00Z.P1D.nc
+  background error:
+    covariance model: hybrid
+    components:
+    - covariance:
+        covariance model: QgError      # Static-B component of covariances
+        horizontal_length_scale: 2.2e6
+        maximum_condition_number: 1.0e6
+        standard_deviation: 1.8e7
+        vertical_length_scale: 15000.0
+      weight:
+        value: 0.0                     # Weight for static covariance (set to 0 effectively turns off static-B)
+    - covariance:
+        covariance model: ensemble     # Ensemble component of covariances
+        localization:
+          horizontal_length_scale: 4.0e6 # 4000km localalization scale
+          localization method: QG
+          maximum_condition_number: 1.0e6
+          standard_deviation: 1.0
+          vertical_length_scale: 30000.0  # Essentially ignores vertical localization since scale >>> 10km
+        members from template:          # Ensemble trajectories: states at subwindow boundaries for each member
+          template:
+            states:
+            - date: 2009-12-30T00:00:00Z
+              filename: qgstart/output/bg/bkgd.ens.%mem%.2009-12-30T00:00:00Z.PT0S.nc
+            - date: 2009-12-30T06:00:00Z
+              filename: qgstart/output/bg/bkgd.ens.%mem%.2009-12-30T00:00:00Z.PT6H.nc
+            - date: 2009-12-30T12:00:00Z
+              filename: qgstart/output/bg/bkgd.ens.%mem%.2009-12-30T00:00:00Z.PT12H.nc
+            - date: 2009-12-30T18:00:00Z
+              filename: qgstart/output/bg/bkgd.ens.%mem%.2009-12-30T00:00:00Z.PT18H.nc
+            - date: 2009-12-31T00:00:00Z
+              filename: qgstart/output/bg/bkgd.ens.%mem%.2009-12-30T00:00:00Z.P1D.nc 
+          pattern: %mem%
+          nmembers: 20
+      weight:
+        value: 1.0                      # Weight for ensemble  covariance (1.0 -> pure ensemble 4DEnVar)
+  observations:
+    observers:
+    - obs operator:
+        obs type: Stream                # Streamfunction
+      obs space:
+        obsdatain:
+          engine:
+            obsfile: qg4DEnVar/output/exp_end/obs/truth_oneob.end.nc
+        obsdataout:
+          engine:
+            obsfile: qg4DEnVar/output/exp_end/obs/4DEnVar_oneob.end.nc
+        obs type: Stream
+      obs error:
+        covariance model: diagonal       # Assume uncorrelated observation errors
+  geometry:
+    nx: 40
+    ny: 20
+    depths: [4000.0, 6000.0]
+  #model:
+  #  name: QG
+  #  tstep: PT1H
+variational:
+  minimizer:
+    algorithm: DRPLanczos             # Derber-Rosati preconditioned Lanczos algorithm
+  iterations:
+  - ninner: 10
+    gradient norm reduction: 1.0e-10
+    geometry:
+      nx: 40
+      ny: 20
+      depths: [4000.0, 6000.0]
+    diagnostics:
+      departures: ombg
+final:
+  diagnostics:
+    departures: oman
+  prints:
+    frequency: PT1H
+output:
+  datadir: qg4DEnVar/output/exp_end/da/
+  exp: 4DEnVar
+  first: PT0S
+  frequency: PT6H
+  type: an
