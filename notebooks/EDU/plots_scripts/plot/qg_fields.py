@@ -219,15 +219,13 @@ def func(args):
             vmax = float(args.fieldmax)
             ex=1
             if (vmax > 1e12): ex=2
-            if (variable == 'q'): vmax=0.5*vmax*(10**-12)**ex #3.5e-4
+            if (variable == 'q'): vmax=0.5*vmax*(10**-11.5)**ex #3.5e-4
             if (variable == 'u'): vmax=0.5*vmax*(10**-6)**ex #140.0
-            if (variable == 'v'): vmax=0.5*vmax*(10**-6)**ex #70.0
+            if (variable == 'v'): vmax=0.25*vmax*(10**-6)**ex #70.0
             vmin = -vmax
             npltlevs=22
         else:
             vmax = 0.0
-            tmax=0.0
-            tmin=0.0
             if args.basefilepath is None: # Full field
                 if (variable == 'x'): vmax=5.0e8 #5.0e8
                 if (variable == 'q'): vmax=6.5e-4  #6.5e-4
@@ -242,11 +240,14 @@ def func(args):
                 npltlevs=22
             vmin = -1.0 * vmax
             if args.basefilepath is None and variable == 'x': vmax=1.1e8
-            for level in levels:
-                for field in fields_plot:
-                    tmax = max(tmax, np.max(field[level]))
-                    tmin = min(tmin, np.min(field[level]))
-            print(f"data range:({tmin},{tmax}), plot range: ({vmin},{vmax}) ")
+        tmax=0.0
+        tmin=0.0
+        for level in levels:
+            for field in fields_plot:
+                tmax = max(tmax, np.max(field[level]))
+                tmin = min(tmin, np.min(field[level]))
+        print(f"data range:({tmin},{tmax}), plot range: ({vmin},{vmax}) ")
+        
         for level in levels:
             clevels.append(np.linspace(vmin, vmax, npltlevs))
             clevels_obs.append(np.linspace(-1.0e8, 1.0e8, npltlevs))
@@ -259,11 +260,12 @@ def func(args):
         params = {
             "font.size": 12,
             "text.latex.preamble" : r"\usepackage{amsmath}\usepackage{amsfonts}",
-            "ytick.left": False,
-            "ytick.labelleft": False,
+            #"ytick.left": False,
+            #"ytick.labelleft": False,
         }
         plt.rcParams.update(params)
         my_formatter = mticker.FuncFormatter(lambda x, pos:"{:.0f}$\degree$E".format(x).replace("-", "\N{MINUS SIGN}"))
+        my_formatter2 = mticker.FuncFormatter(lambda x, pos:"{:.0f}$\degree$N".format(x).replace("-", "\N{MINUS SIGN}"))
         if args.plotwind:
             # Select scale
             if args.basefilepath is None:
@@ -315,8 +317,12 @@ def func(args):
                 ax.set_aspect("equal")
                 cb = fig.colorbar(im, ax=ax, shrink=0.9, extend='both', format=("%.1e" if variable == "q" else None))
                 #ax.set_ylabel("Altitude {:.0f}$\,$m".format(z_coord[level]))
-                ax.set_ylabel(f"Ly {level+1}: {int(z_depths[level][0])}-{int(z_depths[level][1])}km")
+                #ax.set_ylabel(f"Ly {level+1}: {int(z_depths[level][0])}-{int(z_depths[level][1])}km")
                 ax.xaxis.set_major_formatter(my_formatter)
+                ax.yaxis.set_major_formatter(my_formatter2)
+                ax.tick_params(axis='x', labelsize=9)
+                ax.tick_params(axis='y', labelrotation=60, labelsize=9) 
+                ax.set_title(f"Layer {level+1}: {int(z_depths[level][0])}-{int(z_depths[level][1])} km", fontsize=9, loc='left')
 
                 # Set title
                 varname = dict(x="Streamfunction", q="Potential vorticity",u="Zonal Wind", v="Meridional Wind").get(variable)
@@ -325,7 +331,7 @@ def func(args):
                     fig.suptitle(args.title + " - " + varname + " in " + unit)
                 else:
                     fig.suptitle(varname + " in " + unit)
-                fig.subplots_adjust(left=0.04, right=0.98, bottom=0.04, top=0.9, hspace=0.01)
+                fig.subplots_adjust(left=0.06, right=1.0, bottom=0.04, top=0.90, hspace=0.04)
 
             # Save plot
             if args.output is None:

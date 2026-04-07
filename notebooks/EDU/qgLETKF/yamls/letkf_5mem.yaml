@@ -22,10 +22,10 @@ observations:
     obs space:
       obsdatain:
         engine:
-          obsfile: qgLETKF/output/exp_5mem/obs/truth_oneob_newloc.obs3d.nc
+          obsfile: qgstart/output/obs/truth_oneob.obs3d.nc
       obsdataout:
         engine:
-          obsfile: qgLETKF/output/exp_5mem/obs/letkf_oneob_newloc.obs3d.nc
+          obsfile: qgLETKF/output/exp_5mem/plots/letkf_oneob.obs3d.nc
       obs type: Stream
     obs error:
       covariance model: diagonal        # Obs errors genetally considered uncorrelated in R

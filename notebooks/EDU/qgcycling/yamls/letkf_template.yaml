@@ -14,7 +14,7 @@ background:
       - date: &date_mid @DATE_ANL
         filename: @BACKGROUND_FILE 
     pattern: %mem%
-    nmembers: 20
+    nmembers: 100
 
 observations:
   observers:
