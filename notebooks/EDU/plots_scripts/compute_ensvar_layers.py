@@ -11,11 +11,13 @@ def main():
     parser.add_argument("-v", "--variable", required=True, help="Variable name")
     parser.add_argument("-o", "--output", default="ensvar.txt", help="Output text file")
     parser.add_argument("-l", "--label", default="cycle", help="Cycle label, e.g., 'cyc1 bg'")
+    parser.add_argument("-e", "--oberr", default=1.0e7, help="Observation error standard deviation")
     args = parser.parse_args()
 
     # Open file
     ds = Dataset(args.var_file, "r")
     var = ds.variables[args.variable][:]  # assume shape (layer, y, x)
+    var = var + args.oberr**2 # Total spread includes observation error
     ds.close()
 
     nlayer = var.shape[0]

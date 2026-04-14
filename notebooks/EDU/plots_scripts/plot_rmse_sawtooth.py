@@ -93,9 +93,11 @@ def main():
     plt.ylabel("RMSE")
     plt.title("RMSE Sawtooth Plot")
     plt.xticks(xticks, xlabels, rotation=45)
+    plt.ylim(0,4.5e7)
     plt.legend()
     plt.grid()
 
+    
     plt.tight_layout()
     plt.savefig(args.output, dpi=150)
 

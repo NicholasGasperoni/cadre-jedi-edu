@@ -48,15 +48,14 @@ def parse_var(filename):
     data = {}
     with open(filename, "r") as f:
         for line in f:
-            m = re.search(r"(cyc\d+)\s+Layer\s+(\d+): VAR = ([0-9.eE+-]+)", line, re.I)
+            m = re.search(r"(cyc\d+)\s+(bg|an)\s+Layer\s+(\d+): VAR = ([0-9.eE+-]+)", line, re.I)
             if not m: continue
-            print(m)
-            cyc, layer, val = m.groups()
+            cyc, typ, layer, val = m.groups()
             layer = int(layer)
             val = float(val)
             if layer not in data:
-               data[layer] = {"var": []}
-            data[layer]["var"].append(val)
+               data[layer] = {"bg": [], "an": []}
+            data[layer][typ].append(val)
     return data
 
 def main():
@@ -88,11 +87,12 @@ def main():
 
      #   plt.plot(x, bg, marker='o', label=f"Layer {layer} (bg)")
      #   plt.plot(x, an, marker='s', linestyle='--', label=f"Layer {layer} (an)")
- 
+
     for layer in sorted(data.keys()):
         bg = data[layer]["bg"]
         an = data[layer]["an"]
-        vardata = var[layer]["var"]
+        varbg = var[layer]["bg"]
+        varan = var[layer]["an"]
 
         # Ensure matching lengths (skip incomplete last cycle if needed)
         n = min(len(bg), len(an))
@@ -102,10 +102,12 @@ def main():
         for i in range(n):
             combined.append(bg[i])
             combined.append(an[i])
-            combined_var.append(np.sqrt(vardata[i]))
-            combined_var.append(np.sqrt(vardata[i]))
-        #x = list(range(len(combined)))
-        x=[0, 0, 2, 2, 4, 4, 6, 6, 8, 8, 10, 10]
+            combined_var.append(np.sqrt(varbg[i]))
+            combined_var.append(np.sqrt(varan[i]))
+        x = list(range(len(combined)))
+        print(combined_var)
+        #x=[0, 0, 2, 2, 4, 4, 6, 6, 8, 8, 10, 10]
+        x =  [(v // 2) * 2  for v in x]
         plt.plot(x, combined, marker='o', label=f"Layer {layer} RMSE")
         plt.plot(x, combined_var, marker='+', label=f"Layer {layer} Spread")
 
@@ -118,6 +120,7 @@ def main():
     plt.xticks(xticks, xlabels, rotation=45)
     plt.legend()
     plt.grid()
+    plt.ylim(0,12.0e7)
 
     plt.tight_layout()
     plt.savefig(args.output, dpi=150)

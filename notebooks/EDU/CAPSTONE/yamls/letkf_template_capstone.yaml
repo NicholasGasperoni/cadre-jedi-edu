@@ -1,0 +1,66 @@
+window begin: &date_bgn @DATE_BGN
+window length: PT12H
+
+geometry:
+  nx: 20
+  ny: 10
+  depths: [4000.0, 6000.0]
+
+# update (and use for H(x) state at 00Z
+background:
+  members from template:
+    template:
+      states:
+      - date: &date_mid @DATE_ANL
+        filename: @BACKGROUND_FILE 
+    pattern: %mem%
+    nmembers: @ENSSIZE
+
+observations:
+  observers:
+  - obs operator:
+      obs type: Stream
+    obs space:
+      obsdatain:
+        engine:
+          obsfile: CAPSTONE/data/obs/truth_cyc@CYC.obs3d.nc
+      obsdataout:
+        engine:
+          obsfile: CAPSTONE/output/@EXPNAME/da/letkf_cyc@CYC.obs3d.nc
+      obs type: Stream
+    obs error:
+      covariance model: diagonal
+    obs localizations:
+    - localization method: Heaviside
+      lengthscale: @LOCSCALE
+
+driver:
+  update obs config with geometry info: false
+  save prior mean: true
+  save posterior mean: true
+  save posterior mean increment: true
+
+local ensemble DA:
+  solver: LETKF
+  inflation:
+    rtpp: @RTPPINFL
+    mult: @MULTINFL
+
+output:
+  states:
+  - datadir: CAPSTONE/output/@EXPNAME/da
+    date: *date_mid
+    exp: letkf.%{member}%
+    type: an
+  
+output increment:
+  datadir: CAPSTONE/output/@EXPNAME/da
+  exp: letkf_meaninc
+  date: *date_mid
+  type: an
+
+output mean prior:
+  datadir: CAPSTONE/output/@EXPNAME/da
+  exp: letkf_meanprior
+  date: *date_mid
+  type: an
