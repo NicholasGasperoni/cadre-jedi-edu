@@ -26,7 +26,7 @@ observations:
           obsfile: qgstart/output/obs/truth_cyc@CYC.obs3d.nc
       obsdataout:
         engine:
-          obsfile: qgcycling/output/exp_letkf/obs/letkf_cyc@CYC.obs3d.nc
+          obsfile: qgcycling/output/exp_letkf_noinf/obs/letkf_cyc@CYC.obs3d.nc
       obs type: Stream
     obs error:
       covariance model: diagonal
@@ -43,24 +43,24 @@ driver:
 local ensemble DA:
   solver: LETKF
   inflation:
-    rtpp: 0.5
-    mult: 1.1
+    rtpp: 0.0
+    mult: 1.0
 
 output:
   states:
-  - datadir: qgcycling/output/exp_letkf/da
+  - datadir: qgcycling/output/exp_letkf_noinf/da
     date: *date_mid
     exp: letkf.%{member}%
     type: an
   
 output increment:
-  datadir: qgcycling/output/exp_letkf/da
+  datadir: qgcycling/output/exp_letkf_noinf/da
   exp: letkf_meaninc
   date: *date_mid
   type: an
 
 output mean prior:
-  datadir: qgcycling/output/exp_letkf/da
+  datadir: qgcycling/output/exp_letkf_noinf/da
   exp: letkf_meanprior
   date: *date_mid
   type: an

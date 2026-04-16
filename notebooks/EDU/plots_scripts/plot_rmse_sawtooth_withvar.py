@@ -65,6 +65,7 @@ def main():
     parser.add_argument("file", help="RMSE text file")
     parser.add_argument("var_file", help="Ensemble variance text file")
     parser.add_argument("-o", "--output", default="rmse_sawtooth.png")
+    parser.add_argument("-m", "--max", default=12e7, help="maximum value for RMSE plot")
 
     args = parser.parse_args()
 
@@ -75,8 +76,7 @@ def main():
     print(data)
     x = list(range(len(cycles)))
 
-    plt.figure()
-
+    fig, ax = plt.subplots(figsize=(10, 4))
     #for layer in sorted(data.keys()):
     #    bg = data[layer]["bg"]
     #    an = data[layer]["an"]
@@ -120,7 +120,7 @@ def main():
     plt.xticks(xticks, xlabels, rotation=45)
     plt.legend()
     plt.grid()
-    plt.ylim(0,12.0e7)
+    plt.ylim(0,float(args.max))
 
     plt.tight_layout()
     plt.savefig(args.output, dpi=150)
