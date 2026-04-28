@@ -24,8 +24,8 @@ observations:
         begin: PT24H
         nval: 1
         obs locations:
-          lon: [25]                                # List of longitudes for generated observations (only one here)
-          lat: [50]                                # List of latitudes for generated observations (only one here)
+          lon: [-100]                                # List of longitudes for generated observations (only one here)
+          lat: [20]                                # List of latitudes for generated observations (only one here)
           z: [7000.0]                              # List of heights for generated observations (only one here)
         obs error: 4.0e6                           # Observation error standard deviation, in m^2/s
         obs period: PT24H

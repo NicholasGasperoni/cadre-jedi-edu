@@ -1,4 +1,4 @@
-# CADRE JEDI-edu Installation Guide
+# CADRE-JEDI-edu Installation Guide
 
 This software is licensed under the terms of the Apache Licence Version 2.0 which can be obtained at [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
@@ -17,17 +17,35 @@ Note for Mac Users:  Docker is fully supported only for MacOS 14 (Sonoma) or new
 - (Mac Users Only) Go to settings in the Docker window (gear icon at top), then scroll down to "Virtual Machine Options". Make sure under 'Choose Virtual Machine Manager (VMM)' that "Docker VMM" is selected. If it is not, select it and then click "Apply and Restart" at the bottom right.
 ```
 Note on some older Mac/Docker versions, there may be a "QEMU (Legacy)" option as Virtual Machine. This option may be selected in case the tutorial does not work upon first attempts below.
-``` 
-
+```
+ 
 ### Download (clone) the repository containing cadre-jedi-edu tutorials and jedi programs
 
-- For Windows Users:
-  - Download and install git following the instructions at the following link:  https://git-scm.com/install/windows
-  - Open a Powershell terminal window.
-    - (Optional) Some users may find VS code to be more helpful/convenient, which is a program that can be downloaded for free online.
-  - Double-check that git is installed correctly by running the command ```git  --version```
-  - Run the git command below
+#### <u>For Windows Users:</u>
+
+>  - **Download and install git** following the instructions at the following link:  https://git-scm.com/install/windows
+>  - **Open a Powershell terminal window**.
+>    - (Optional) Some users may find VS code to be more helpful/convenient, which is a program that can be downloaded for free online.
+>  - **Double-check that git is installed correctly** by running the command ```git --version```
+>  - **Open the Windows Subsystem for Linux (WSL) program**: Enter the command ```wsl``` or ```wsl.exe``` inside your Powershell terminal window
+>    - You should see something like "/Docker.desktop/....." shown on the terminal. After that, you can run commands as you do on a Linux machine.
+>  - **Run the commands below** to download the full repository, and exit WSL upon successful download
+>
 ``` 
+# Clone the repository
+git clone https://github.com/NicholasGasperoni/cadre-jedi-edu.git
+# Enter the cloned cadre-jedi-edu repository:
+cd cadre-jedi-edu
+# List the contents of the repository
+ls .
+# Exit WSL
+exit
+```
+
+#### <u>For Mac Users:</u> 
+>  - **Open a terminal window using the Terminal app
+>  - **Run the commands below** (note git should automatically download & install if it is not already installed on your macbook)
+```
 git clone https://github.com/NicholasGasperoni/cadre-jedi-edu.git
 # Enter the cadre-jedi-edu repository:
 cd cadre-jedi-edu
@@ -35,18 +53,7 @@ cd cadre-jedi-edu
 ls .
 ```
 
-- For Mac Users: 
-  - Open the terminal window from the Terminal app
-  - Run the git command below (note git should automatically download & install if it is not already installed on your macbook)
-```
-git clone https://github.com/NicholasGasperoni/cadre-jedi-edu.git
-# Enter the cadre-jedi-edu repository:
-cd cadre-jedi-edu
-# List the contents of the repository
-ls .
-```
-
-- If the repository cloned correctly, the following contents will be listed from the `ls` command:
+**<u>If the repository cloned correctly, the following contents will be listed from the `ls` command:</u>**
 ```
 README.md	START.md	container	img		notebooks
 ```

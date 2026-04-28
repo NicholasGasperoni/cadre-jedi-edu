@@ -37,7 +37,7 @@ variational:
   minimizer:
     algorithm: DRPLanczos
   iterations:
-  - ninner: 10
+  - ninner: 30
     gradient norm reduction: 1.0e-10
     geometry:
       nx: 40
@@ -52,7 +52,7 @@ variational:
     diagnostics:
       departures: ombg
     test: on
-  - ninner: 10
+  - ninner: 30
     gradient norm reduction: 1.0e-10
     geometry:
       nx: 40

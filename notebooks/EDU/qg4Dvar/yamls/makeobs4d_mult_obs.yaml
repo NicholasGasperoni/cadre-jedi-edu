@@ -7,7 +7,7 @@ initial condition:
   filename: qgstart/output/truth/truth.fc.2009-12-15T00:00:00Z.P15D.nc
 model:
   name: QG
-  tstep: PT3H
+  tstep: PT10M
 forecast length: PT24H
 window begin: 2009-12-30T00:00:00Z
 window length: PT24H
@@ -25,6 +25,6 @@ observations:
         nval: 1
         obs density: 50
         obs error: 4.0e6
-        obs period: PT3H
+        obs period: PT8H
 make obs: true
 obs perturbations: true

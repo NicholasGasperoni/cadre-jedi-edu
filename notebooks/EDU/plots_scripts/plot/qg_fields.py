@@ -67,8 +67,8 @@ def func(args):
             # Get data
             res = netCDF4.Dataset(args.plotObsLocations)
             for obs_type in obs_types:
-                print(f"Obs_type={obs_type}")
-                print(f"res.groups={res.groups}")
+                #print(f"Obs_type={obs_type}")
+                #print(f"res.groups={res.groups}")
                 if obs_type in res.groups:
                     locations = res.groups[obs_type].groups["Location"].variables["values"][:,:]
                     break
@@ -268,10 +268,13 @@ def func(args):
         my_formatter2 = mticker.FuncFormatter(lambda x, pos:"{:.0f}$\degree$N".format(x).replace("-", "\N{MINUS SIGN}"))
         if args.plotwind:
             # Select scale
-            if args.basefilepath is None:
+            if args.fieldmax and args.scalemax:
+                scale = float(args.fieldmax)*(10**-6)
+            elif args.basefilepath is None:
                 scale = (vec_len_frac)*np.max(np.sqrt(np.square(fields_u_plot)+np.square(fields_v_plot)),axis=(0,1,2,3))/plot_width
             else:
                 scale = (vec_len_frac)*np.max(np.sqrt(np.square(fields_u_plot)+np.square(fields_v_plot)),axis=(0,1,2,3))/plot_width
+            print(f"vector scale = {scale}")
             dx_quiver = max(nx//20, 1)
             dy_quiver = max(ny//10, 1)
 

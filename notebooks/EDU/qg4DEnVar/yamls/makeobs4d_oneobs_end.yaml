@@ -7,7 +7,7 @@ initial condition:
   filename: qgstart/output/truth/truth.fc.2009-12-15T00:00:00Z.P15D.nc
 model:
   name: QG
-  tstep: PT6H
+  tstep: PT10M
 forecast length: PT24H
 window begin: 2009-12-30T00:00:00Z
 window length: PT24H
@@ -24,7 +24,7 @@ observations:
         begin: PT24H
         nval: 1
         obs locations:
-          lon: [-125]                              # List of longitudes for generated observations (only one here)
+          lon: [-100]                              # List of longitudes for generated observations (only one here)
           lat: [15]                                # List of latitudes for generated observations (only one here)
           z: [7000.0]                              # List of heights for generated observations (only one here)
         obs error: 4.0e6                           # Observation error standard deviation, in m^2/s
