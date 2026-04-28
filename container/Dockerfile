@@ -1,4 +1,4 @@
-FROM jcsda/docker-clang-mpich-dev:edu
+FROM ghcr.io/youngminkchoi/cadre-jedi-edu-base:v2
 #NOTE python used by Container is /opt/view/bin/python3, so need to install with that version
 RUN /opt/view/bin/python3 -m pip install jupyter -U && /opt/view/bin/python3 -m pip install jupyterlab
 RUN /opt/view/bin/python3 -m pip install bash_kernel && /opt/view/bin/python3 -m bash_kernel.install
