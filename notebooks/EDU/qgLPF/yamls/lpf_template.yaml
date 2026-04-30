@@ -1,0 +1,66 @@
+time window:
+  begin: &date_bgn @DATE_BGN
+  length: PT12H
+
+geometry:
+  nx: 40
+  ny: 20
+  depths: [4000.0, 6000.0]
+
+# update (and use for H(x) state at 00Z
+background:
+  members from template:
+    template:
+      states:
+      - date: &date_mid @DATE_ANL
+        filename: @BACKGROUND_FILE 
+    pattern: %mem%
+    nmembers: 20
+
+observations:
+  observers:
+  - obs operator:
+      obs type: Stream
+    obs space:
+      obsdatain:
+        obsfile: /home/nonroot/shared/EDU/qgstart/output/obs/truth_cyc@CYC.obs3d.nc
+      obsdataout:
+        obsfile: qgLPF/output/exp_lpf/obs/lpf_cyc@CYC.obs3d.nc
+      obs type: Stream
+    obs error:
+      covariance model: diagonal
+    obs localizations:
+    - lengthscale: 4.0e6
+
+driver:
+  update obs config with geometry info: false
+  save prior mean: true
+  save posterior mean: true
+  save posterior mean increment: true
+
+local ensemble DA:
+  solver: PF
+  inflation:
+    mult: 1.1
+  pf frac neff: 0.1
+  pf kddm: 0
+  pf maxiter: 1
+  
+output:
+  states:
+  - datadir: qgLPF/output/exp_lpf/da
+    date: *date_mid
+    exp: lpf.%{member}%
+    type: an
+  
+output increment:
+  datadir: qgLPF/output/exp_lpf/da
+  exp: lpf_meaninc
+  date: *date_mid
+  type: an
+
+output mean prior:
+  datadir: qgLPF/output/exp_lpf/da
+  exp: lpf_meanprior
+  date: *date_mid
+  type: an

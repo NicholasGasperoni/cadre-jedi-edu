@@ -1,0 +1,28 @@
+geometry:
+  nx: 40
+  ny: 20
+  depths: [4000.0, 6000.0]
+state:
+  date: 2009-12-31T00:00:00Z
+  filename: qgLPF/output/exp_mult_obs/da/lpf_meanprior.an.2009-12-31T00:00:00Z.nc
+time window:
+  begin: 2009-12-30T18:00:00Z
+  length: PT12H
+observations:
+  get values:
+    variable change:
+      input variables: []
+      output variables: []
+  observers:
+  - obs operator:
+      obs type: Stream                             # The observation type is the stream function
+    obs space:
+      obsdatain:
+        obsfile: qgLPF/output/exp_mult_obs/obs/truth_100obs.obs3d.nc
+      obsdataout:
+        obsfile: qgLPF/output/exp_mult_obs/obs/hofx_meanbkg.obs3d.nc
+      obs type: Stream
+    obs operator:
+      obs type: Stream
+    get values:
+      interpolation type: default_1
