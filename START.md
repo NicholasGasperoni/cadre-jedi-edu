@@ -33,7 +33,7 @@ Note on some older Mac/Docker versions, there may be a "QEMU (Legacy)" option as
 >
 ``` 
 # Clone the repository
-git clone https://github.com/NicholasGasperoni/cadre-jedi-edu.git
+git clone -b develop https://github.com/NicholasGasperoni/cadre-jedi-edu.git
 # Enter the cloned cadre-jedi-edu repository:
 cd cadre-jedi-edu
 # List the contents of the repository
