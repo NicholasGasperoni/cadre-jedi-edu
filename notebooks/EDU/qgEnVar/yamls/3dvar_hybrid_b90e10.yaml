@@ -44,7 +44,7 @@ cost function:
       obs space:
         obsdatain:
           engine:
-            obsfile: qgstart/output/obs/truth_oneob_northeast.obs3d.nc
+            obsfile: qgstart/output/obs/truth_oneob.obs3d.nc
         obsdataout:
           engine:
             obsfile: qgEnVar/output/exp_b90e10/obs/3denvar_obsdataout.obs3d.nc

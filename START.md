@@ -27,17 +27,22 @@ Note on some older Mac/Docker versions, there may be a "QEMU (Legacy)" option as
 >  - **Open a Powershell terminal window**.
 >    - (Optional) Some users may find VS code to be more helpful/convenient, which is a program that can be downloaded for free online.
 >  - **Double-check that git is installed correctly** by running the command ```git --version```
->  - **Open the Windows Subsystem for Linux (WSL) program**: Enter the command ```wsl``` or ```wsl.exe``` inside your Powershell terminal window
->    - You should see something like "/Docker.desktop/....." shown on the terminal. After that, you can run commands as you do on a Linux machine.
->  - **Run the commands below** to download the full repository, and exit WSL upon successful download
+>  - **Run the commands below** to download the full repository
 >
 ``` 
+# Open the Windows Subsystem for Linux (WSL) program
+wsl.exe
+# You should see something like "/Docker.desktop/....." shown on the terminal. After that, you can run commands as you do on a Linux machine.
+
 # Clone the repository
 git clone -b develop https://github.com/NicholasGasperoni/cadre-jedi-edu.git
+
 # Enter the cloned cadre-jedi-edu repository:
 cd cadre-jedi-edu
+
 # List the contents of the repository
 ls .
+
 # Exit WSL
 exit
 ```
@@ -46,7 +51,7 @@ exit
 >  - **Open a terminal window using the Terminal app
 >  - **Run the commands below** (note git should automatically download & install if it is not already installed on your macbook)
 ```
-git clone https://github.com/NicholasGasperoni/cadre-jedi-edu.git
+git clone -b develop https://github.com/NicholasGasperoni/cadre-jedi-edu.git
 # Enter the cadre-jedi-edu repository:
 cd cadre-jedi-edu
 # List the contents of the repository
@@ -60,14 +65,15 @@ README.md	START.md	container	img		notebooks
 
 ### Build and enter the container for the first time
 Navigate to the container directory and build the container with the following commands. 
-*Note* 'educontainer' is the name of the container we are building.
+> *Note* 'educontainer' is the name of the container we are building.
 ```
 cd container
 docker build -t educontainer --build-arg=Dockerfile .
 ```
-The build process will take approximately 6 minutes to complete.
+The build process will take approximately 5 minutes to complete.
 Once the container is built successfully, we can now attempt to run it from within the container directory!
-Run the docker ommand below, making sure to replace ```"<your>/<path>/<to>"``` with the actual path on your local computer (run the `pwd` command if you are not sure what directory to input!)
+Run the docker command below, making sure to replace ```"</path/to>"``` with the actual path on your local computer (run the `pwd` command if you are not sure what directory to input!)
+> *Note: Make sure that Docker Desktop app is running in the background of your computer before submitting the “docker run” command. Note there should be an icon with a whale on the menu bar (mac) or system tray (windows) to indicate whether it is currently running.*
 ```
 # Make sure you are within the `cadre-jedi-edu/container` directory
 cd </path/to>/cadre-jedi-edu/container
@@ -98,15 +104,16 @@ Then you should open the browser and go to:
 
 #### Notes on building and running tutorial container
 - The build step only needs to be done once.
-- The `docker run` command will run the container using Docker Desktop. Even if you exit the terminal window **the container will remain running in the background**. There is no harm in leaving it running, especially if you plan to come back to the tutorial environment again.
+- The `docker run` command will run the container using Docker Desktop - make sure Docker Desktop is open in teh background before submitting "docker run".
+- Even if you exit the "docker run" terminal window **the container may remain running in the background**. There is no harm in leaving it running, especially if you plan to come back to the tutorial environment again.
 - If you want to stop the container that is running, you need to open the `Docker Desktop` dashboard, navigate to the `containers` tab, and click to stop the one that is running ( a square ⏹  under the `Action` tab indicates a running process, and clicking on it will stop that container.)
-- You can restart a stopped container by simply clicking the play button ▶ for a container listed at `Docker Desktop -> containers`. This can be a quick alternative to the terminal-based `docker run` option above for subsequent sessions.
+- Conversely, you can restart a stopped container by simply clicking the play button ▶ for a container listed at `Docker Desktop -> containers`. This can be a quick alternative to the terminal-based `docker run` option above for subsequent sessions.
 
 
 ### View the container and tutorials!
-- Open your favorite web browser and enter `localhost:9999` as URL. This may take up to ~20 seconds to load correctly, so be patient. You may need to refresh the webpage a few times before it appears. 
+- Open your favorite web browser and enter `localhost:9999` as URL. This may take up to ~30 seconds to load correctly, so be patient. You may need to refresh the webpage a few times before it appears. 
 - All that follows in the tutorial is done **in the container ON THE WEBPAGE you just opened**.
-- To open the first tutorial: On the left of the web page there is a tree of files. Click on the little folder icon if you aren't on it already (open the one called `shared/`), and double click on `0.qg_tutorial_start.ipynb`.
+- To open the first tutorial: On the left of the web page there is a tree of files. Double-click on the `shared`  folder to enter it, which contains all the tutorial notebooks. Then double click on `0.qg_tutorial_start.ipynb`, to open and get started!
 
 Note that in this file, you will be able to run commands by clicking on the cell that contains it and click the `play` button.
 ![welcome](img/run_command.png)
