@@ -46,7 +46,7 @@ exit
 >  - **Open a terminal window using the Terminal app
 >  - **Run the commands below** (note git should automatically download & install if it is not already installed on your macbook)
 ```
-git clone https://github.com/NicholasGasperoni/cadre-jedi-edu.git
+git clone -b develop https://github.com/NicholasGasperoni/cadre-jedi-edu.git
 # Enter the cadre-jedi-edu repository:
 cd cadre-jedi-edu
 # List the contents of the repository
