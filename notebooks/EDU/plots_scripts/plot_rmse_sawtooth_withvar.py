@@ -134,6 +134,51 @@ def main():
     plt.savefig(args.output, dpi=150)
     print(f"Saved plot to {args.output}")
 
+    
+    # Collect per-layer stats for averaging across layers
+    bg_means, bg_stds = [], []
+    var_means, var_stds = [], []
+    ssr_vals = []  # per-cycle spread-skill ratios, pooled across layers
+    st=0
+    
+    for layer in sorted(data.keys()):
+        bg_vals  = np.array(data[layer]["bg"][st:])
+        var_vals = np.array(var[layer]["bg"][st:])
+
+        bg_means.append(np.mean(bg_vals))
+        bg_stds.append(np.std(bg_vals, ddof=1))
+
+        var_means.append(np.mean(var_vals))
+        var_stds.append(np.std(var_vals, ddof=1))
+
+        # Per-cycle spread-skill ratio for this layer: spread / RMSE
+        spread_vals = np.sqrt(var_vals)
+        ssr_vals.append(spread_vals / bg_vals)
+
+    # Average mean and spread across layers (matching original logic)
+    bgavg  = np.mean(bg_means)
+    varavg = np.sqrt(np.mean(var_means))
+
+    # Layer-averaged std dev:
+    #   For RMSE: average the per-layer std devs
+    #   For spread: propagate through the sqrt(mean(var)) formula using
+    #               d/d(var_mean) sqrt(mean(var)) = 1 / (2*sqrt(mean(var)))
+    bgstd  = np.mean(bg_stds)
+    varstd = np.mean(var_stds) / (2.0 * varavg) if varavg > 0 else 0.0
+
+    # Spread-skill ratio: mean and std dev over all cycles and layers
+    # Computed per-cycle (not ratio-of-means) to capture cycle-to-cycle variability
+    ssr_all = np.concatenate(ssr_vals)
+    ssr_mean = np.mean(ssr_all)
+    ssr_std  = np.std(ssr_all, ddof=1)
+
+    if   ssr_mean < 0.9:  calibration = "underdispersed (overconfident)"
+    elif ssr_mean > 1.1:  calibration = "overdispersed"
+    else:                 calibration = "well-calibrated"
+
+    print(f"Ens. Mean Background RMSE = {bgavg:.6f}  (std dev = {bgstd:.6f})")
+    print(f"  Avg. Total Prior Spread = {varavg:.6f}  (std dev = {varstd:.6f})")
+    print(f"  Avg. Spread-Skill Ratio = {ssr_mean:.6f}  (std dev = {ssr_std:.6f})  → {calibration}")
 
 if __name__ == "__main__":
     main()
