@@ -1,0 +1,19 @@
+forecast length: P1D                             # Run 
+geometry:                                         # Declare the geometry of the model grid points
+  nx: 40                                          # number of grid points in zonal direction
+  ny: 20                                          # number of grid points in the meridional direction
+  depths: [4000.0, 6000.0]                        # Height of 1st and 2nd layer
+initial condition:                                # Declare details of initial condition
+  date: @DATE_IC                           # Date of initial condition
+  filename: qgLPF/output/exp_lpf/da/lpf.%MEMBER%.an.@DATE_IC.nc
+model:                                            # Declare model used
+  name: QG                                        # Quasi-geostrophic model
+  tstep: PT1H                                     # Time step is 10 min
+output:                                           # Declare output
+  datadir: qgLPF/output/exp_lpf/da/                  # Directory where output file will be stored
+  date: @DATE_IC                           # Date of output file
+  exp: lpf.%MEM%                                # Experiment to generate truth file
+  frequency: PT24H                                 # Output frequency is every 6 hours
+  type: fc                                        # Truth comes from running qg model in forecast mode
+prints:                                           # Declare output specifics
+  frequency: PT3H                                 # Generate output every 3 hours

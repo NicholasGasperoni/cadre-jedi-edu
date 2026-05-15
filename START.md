@@ -64,7 +64,7 @@ README.md       START.md        container       img             notebooks
 ```
 
 ### Build and enter the container for the first time
-Navigate to the container directory and build the container with the following commands.
+Navigate to the container directory and build the container with the following commands. 
 > *Note* 'educontainer' is the name of the container we are building.
 ```
 cd container
@@ -106,12 +106,12 @@ Then you should open the browser and go to:
 - The build step only needs to be done once.
 - The `docker run` command will run the container using Docker Desktop - make sure Docker Desktop is open in teh background before submitting "docker run".
 - Even if you exit the "docker run" terminal window **the container may remain running in the background**. There is no harm in leaving it running, especially if you plan to come back to the tutorial environment again.
-- If you want to stop the container that is running, you need to open the `Docker Desktop` dashboard, navigate to the `containers` tab, and click to stop the one that is running ( a square ⏹   under the `Action` tab indicates a running process, and clicking on it will stop that container.)
+- If you want to stop the container that is running, you need to open the `Docker Desktop` dashboard, navigate to the `containers` tab, and click to stop the one that is running ( a square ⏹  under the `Action` tab indicates a running process, and clicking on it will stop that container.)
 - Conversely, you can restart a stopped container by simply clicking the play button ▶ for a container listed at `Docker Desktop -> containers`. This can be a quick alternative to the terminal-based `docker run` option above for subsequent sessions.
 
 
 ### View the container and tutorials!
-- Open your favorite web browser and enter `localhost:9999` as URL. This may take up to ~30 seconds to load correctly, so be patient. You may need to refresh the webpage a few times before it appears.
+- Open your favorite web browser and enter `localhost:9999` as URL. This may take up to ~30 seconds to load correctly, so be patient. You may need to refresh the webpage a few times before it appears. 
 - All that follows in the tutorial is done **in the container ON THE WEBPAGE you just opened**.
 - To open the first tutorial: On the left of the web page there is a tree of files. Double-click on the `shared`  folder to enter it, which contains all the tutorial notebooks. Then double click on `0.qg_tutorial_start.ipynb`, to open and get started!
 
