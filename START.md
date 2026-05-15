@@ -35,7 +35,7 @@ wsl.exe
 # You should see something like "/Docker.desktop/....." shown on the terminal. After that, you can run commands as you do on a Linux machine.
 
 # Clone the repository
-git clone -b develop https://github.com/NicholasGasperoni/cadre-jedi-edu.git
+git clone https://github.com/NicholasGasperoni/cadre-jedi-edu.git
 
 # Enter the cloned cadre-jedi-edu repository:
 cd cadre-jedi-edu
@@ -51,7 +51,7 @@ exit
 >  - **Open a terminal window using the Terminal app
 >  - **Run the commands below** (note git should automatically download & install if it is not already installed on your macbook)
 ```
-git clone -b develop https://github.com/NicholasGasperoni/cadre-jedi-edu.git
+git clone https://github.com/NicholasGasperoni/cadre-jedi-edu.git
 # Enter the cadre-jedi-edu repository:
 cd cadre-jedi-edu
 # List the contents of the repository
