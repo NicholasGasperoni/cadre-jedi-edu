@@ -40,6 +40,9 @@ git clone https://github.com/NicholasGasperoni/cadre-jedi-edu.git
 # Enter the cloned cadre-jedi-edu repository:
 cd cadre-jedi-edu
 
+# Checkout release version ('git tag' lists all official releases)
+git checkout v1.0.0
+
 # List the contents of the repository
 ls .
 
@@ -52,15 +55,20 @@ exit
 >  - **Run the commands below** (note git should automatically download & install if it is not already installed on your macbook)
 ```
 git clone https://github.com/NicholasGasperoni/cadre-jedi-edu.git
+
 # Enter the cadre-jedi-edu repository:
 cd cadre-jedi-edu
+
+# Checkout release version ('git tag' lists all official releases)
+git checkout v1.0.0
+
 # List the contents of the repository
 ls .
 ```
 
 **<u>If the repository cloned correctly, the following contents will be listed from the `ls` command:</u>**
 ```
-README.md       START.md        container       img             notebooks
+container	img		LICENSE.md	notebooks	README.md	START.md
 ```
 
 ### Build and enter the container for the first time
