@@ -41,7 +41,7 @@ git clone https://github.com/NicholasGasperoni/cadre-jedi-edu.git
 cd cadre-jedi-edu
 
 # Checkout release version ('git tag' lists all official releases)
-git checkout v1.0.0
+git checkout v1.0.1
 
 # List the contents of the repository
 ls .
@@ -60,7 +60,7 @@ git clone https://github.com/NicholasGasperoni/cadre-jedi-edu.git
 cd cadre-jedi-edu
 
 # Checkout release version ('git tag' lists all official releases)
-git checkout v1.0.0
+git checkout v1.0.1
 
 # List the contents of the repository
 ls .
